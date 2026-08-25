@@ -1,0 +1,19 @@
+# client/.gitignore
+
+# Dependencies
+node_modules/
+
+# Production Build
+dist/
+build/
+dist-ssr/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Logs and System Files
+npm-debug.log*
+yarn-error.log*
+.DS_Store

@@ -1,0 +1,12 @@
+# server/.gitignore
+
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+
+# Logs and System Files
+npm-debug.log*
+yarn-error.log*
+.DS_Store
