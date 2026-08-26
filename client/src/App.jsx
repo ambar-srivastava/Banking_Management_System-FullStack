@@ -6,10 +6,12 @@ import { ProtectedRoute } from "./components/protected-route";
 import { LoginSkeleton } from "./components/skeletons/LoginSkeleton";
 import { RegisterSkeleton } from "./components/skeletons/RegisterSkeleton";
 import { DashboardSkeleton } from "./components/skeletons/DashboardSkeleton";
+import { AccountsSkeleton } from "./components/skeletons/AccountsSkeleton";
 
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/pages/RegisterPage"));
 const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
+const AccountsPage = lazy(() => import("@/pages/AccountsPage"));
 
 function App() {
   return (
@@ -39,6 +41,14 @@ function App() {
             element={
               <Suspense fallback={<DashboardSkeleton />}>
                 <DashboardPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/accounts"
+            element={
+              <Suspense fallback={<AccountsSkeleton />}>
+                <AccountsPage />
               </Suspense>
             }
           />

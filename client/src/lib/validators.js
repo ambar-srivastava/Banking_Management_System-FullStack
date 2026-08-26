@@ -10,3 +10,15 @@ export const loginSchema = z.object({
     email: z.string().email('Enter a valid email address'),
     password: z.string().min(1, 'Password is required'),
 });
+
+export const openAccountSchema = z.object({
+    accountType: z.enum(['savings', 'checking'], {
+        required_eerrr: 'Select an account type',
+    }),
+})
+
+export const transferSchema = z.object({
+    fromAccountId: z.string().min(1, 'Select an account to transfer from'),
+    toAccountNumber: z.string().min(6, 'Enter a valid account number'),
+    amount: z.coerce.number().positive('Amount must be greater than 0'),
+})
