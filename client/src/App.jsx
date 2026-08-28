@@ -7,11 +7,15 @@ import { LoginSkeleton } from "./components/skeletons/LoginSkeleton";
 import { RegisterSkeleton } from "./components/skeletons/RegisterSkeleton";
 import { DashboardSkeleton } from "./components/skeletons/DashboardSkeleton";
 import { AccountsSkeleton } from "./components/skeletons/AccountsSkeleton";
+import { TransactionsSkeleton } from "./components/skeletons/TransactionsSkeleton";
+import { LoansSkeleton } from "./components/skeletons/LoansSkeleton";
 
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/pages/RegisterPage"));
 const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
 const AccountsPage = lazy(() => import("@/pages/AccountsPage"));
+const TransactionsPage = lazy(() => import("@/pages/TransactionsPage"));
+const LoansPage = lazy(() => import("@/pages/LoansPage"));
 
 function App() {
   return (
@@ -49,6 +53,24 @@ function App() {
             element={
               <Suspense fallback={<AccountsSkeleton />}>
                 <AccountsPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/accounts/:accountId/transactions"
+            element={
+              <Suspense fallback={<TransactionsSkeleton />}>
+                <TransactionsPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/loans"
+            element={
+              <Suspense fallback={<LoansSkeleton />}>
+                <LoansPage />
               </Suspense>
             }
           />

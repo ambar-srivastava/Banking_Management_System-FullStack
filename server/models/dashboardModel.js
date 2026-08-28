@@ -6,7 +6,7 @@ async function getCustomerDashboard(userId) {
     );
 
     const recentTxResult = await pool.query(
-        `SELECT t.id, t.type, t.amount, t.balance_after, t.created_at, a.account_number FROM transactions t JOIN accounts a ON t.account_id = a.id WHERE a.user_id = $1 ORDER BY t.creted_at DESC LIMIT 5`, [userId]
+        `SELECT t.id, t.type, t.amount, t.balance_after, t.created_at, a.account_number FROM transactions t JOIN accounts a ON t.account_id = a.id WHERE a.user_id = $1 ORDER BY t.created_at DESC LIMIT 5`, [userId]
     );
 
     const loanSummaryResult = await pool.query(

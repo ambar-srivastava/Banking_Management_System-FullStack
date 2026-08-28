@@ -40,12 +40,12 @@ export function CustomerDashboard({ data }) {
           <CardTitle>Loan Summary</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
-          {data.loanSummary.length === 0 && (
+          {(!data.loanSummary || data.loanSummary.length === 0) && (
             <p className="text-sm text-muted-foreground">
               No loan applications yet.
             </p>
           )}
-          {data.loanSummary.map((item) => (
+          {data.loanSummary?.map((item) => (
             <Badge key={item.status} variant="secondary">
               {item.status}: {item.count}
             </Badge>

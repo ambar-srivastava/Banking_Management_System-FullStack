@@ -90,8 +90,8 @@ export function TransferFundsDialog({ accounts = [] }) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant="secondary">Transfer Funds</Button>
+      <DialogTrigger render={<Button variant="secondary" />}>
+        Transfer Funds
       </DialogTrigger>
       <DialogContent>
         {step === "form" && (

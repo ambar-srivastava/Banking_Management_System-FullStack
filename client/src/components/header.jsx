@@ -32,6 +32,12 @@ export function Header() {
           >
             Accounts
           </Link>
+          <Link
+            to="/loans"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Loans
+          </Link>
         </nav>
       </div>
 

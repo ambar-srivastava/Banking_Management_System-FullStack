@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchAccounts } from "@/features/accounts/accountSlice";
 import { Header } from "@/components/header";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AccountsSkeleton } from "@/components/skeletons/AccountsSkeleton";
@@ -10,6 +12,7 @@ import { TransferFundsDialog } from "@/features/accounts/TransferFundsDialog";
 
 export default function AccountsPage() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const { list, status, error } = useSelector((state) => state.accounts);
 
   useEffect(() => {
@@ -62,6 +65,16 @@ export default function AccountsPage() {
                   <p className="text-2xl font-bold">
                     Rs. {parseFloat(account.balance).toFixed(2)}
                   </p>
+                  <Button
+                    render={
+                      <Link to={`/accounts/${account.id}/transactions`} />
+                    }
+                    variant="link"
+                    className="px-0 mt-2"
+                    nativeButton={false}
+                  >
+                    View Transactions &rarr;
+                  </Button>
                 </CardContent>
               </Card>
             ))}

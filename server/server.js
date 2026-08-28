@@ -32,6 +32,8 @@ app.use('/api/accounts', accountRoutes);
 
 app.use('/api/loans', loanRoutes);
 
+app.use('/api/dashboard', dashboardRoutes);
+
 // ---- Start server ----
 const PORT = process.env.PORT || 5000;
 

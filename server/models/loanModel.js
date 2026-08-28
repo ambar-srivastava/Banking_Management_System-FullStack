@@ -11,9 +11,21 @@ async function findLoansByUserId(userId) {
     return result.rows;
 }
 
+// async function findPendingLoans() {
+//     const result = await pool.query(`SELECT * FROM loans WHERE status = 'pending' ORDER BY created_at ASC`);
+//     return result.rows;
+// }
+
 async function findPendingLoans() {
-    const result = await pool.query(`SELECT * FROM loans WHERE status = 'pending' ORDER BY created_at ASC`);
-    return result.rows;
+    const result = await pool.query(`
+    SELECT l.*, u.full_name, u.email, a.account_number
+    FROM loans l
+    JOIN users u ON l.user_id = u.id
+    JOIN accounts a ON l.account_id = a.id
+    WHERE l.status = 'pending'
+    ORDER BY l.created_at ASC
+  `)
+    return result.rows
 }
 
 async function findLoanById(loanId) {

@@ -60,9 +60,7 @@ export function OpenAccountDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>Open New Account</Button>
-      </DialogTrigger>
+      <DialogTrigger render={<Button />}>Open New Account</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Open a new account</DialogTitle>
