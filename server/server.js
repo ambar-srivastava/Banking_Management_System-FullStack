@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 // ---- Core dependencies ----
+// const http = require('http');
 const express = require('express');
 const cors = require('cors');
 
@@ -13,7 +14,9 @@ const loanRoutes = require('./routes/loanRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 
 // ---- App setup ----
+// const app = require('./app');
 const app = express();
+// const { initSocket } = require('./socket');
 app.use(express.json());
 app.use(cors());
 

@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { findUserByEmail, createUser } = require('../models/userModel');
+const asyncHandler = require('../utils/asyncHandler');
+const AppError = require('../utils/AppError');
 
 async function registerController(req, res) {
     try {
@@ -9,16 +11,16 @@ async function registerController(req, res) {
 
         //1. Basic input vallidation
         if (!fullName || !email || !password) {
-            return res.status(400).json({ error: 'All fields are required' })
+            throw new AppError('All fields are required', 400);
         }
         if (password.length < 8) {
-            return res.status(400).json({ error: "Password must be at least 8 characters" });
+            throw new AppError('Password must be at least 8 characters', 400);
         }
 
         //2. Check if the email is already registered
         const existingUser = await findUserByEmail(email);
         if (existingUser) {
-            return res.status(409).json({ error: "Email already registered" })
+            throw new AppError('Email already registered', 409);
         }
 
         //3. Hash the Password - Never store it as plain text
