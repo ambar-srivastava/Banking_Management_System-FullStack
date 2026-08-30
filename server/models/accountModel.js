@@ -73,7 +73,15 @@ async function transferFunds(senderAccountId, recieverAccountNumber, amount) {
 
         await client.query('COMMIT');
 
-        return { newSenderBalance, newRecieverBalance };
+        return {
+            newSenderBalance, newRecieverBalance,
+            senderId: sender.id,
+            senderUserId: sender.user_id,
+            senderAccountNumber: sender.account_number,
+            recieverId: reciever.id,
+            recieverUserId: reciever.user_id,
+            recieverAccountNumber: reciever.account_number,
+        };
 
     } catch (err) {
         await client.query('ROLLBACK'); // undo verything if ANY step failed

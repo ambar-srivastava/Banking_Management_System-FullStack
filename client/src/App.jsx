@@ -17,10 +17,13 @@ const AccountsPage = lazy(() => import("@/pages/AccountsPage"));
 const TransactionsPage = lazy(() => import("@/pages/TransactionsPage"));
 const LoansPage = lazy(() => import("@/pages/LoansPage"));
 
+import { SocketManager } from "@/components/socket-manager";
+
 function App() {
   return (
     <BrowserRouter>
       <Toaster richColors position="top-center" />
+      <SocketManager />
       <Routes>
         <Route
           path="/login"

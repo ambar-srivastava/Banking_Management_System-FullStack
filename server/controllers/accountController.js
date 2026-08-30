@@ -3,6 +3,8 @@ const generateAccountNumber = require('../utils/generateAccountNumber');
 const { getTransactionHistory, getStatementData } = require('../models/transactionModel');
 const generateStatementPDF = require('../utils/generateStatementPDF');
 
+const { getIO } = require('../socket');
+
 const ALLOWED_TYPES = ['savings', 'checking'];
 
 async function openAccount(req, res) {
@@ -59,6 +61,23 @@ async function transfer(req, res) {
         }
 
         const result = await transferFunds(fromAccountId, toAccountNumber, amount);
+
+        const io = getIO();
+        if (io) {
+            io.to(`user:${result.senderUserId}`).emit('transaction:new', {
+                accountId: result.senderId,
+                accountNumber: result.senderAccountNumber,
+                type: 'transfer_out',
+                amount,
+                balance: result.newSenderBalance,
+            })
+            io.to(`user:${result.recieverUserId}`).emit('transaction:new', {
+                accountId: result.recieverId,
+                accountNumber: result.recieverAccountNumber,
+                type: 'transfer_in',
+                balance: result.newRecieverBalance,
+            })
+        }
 
         res.json({ message: 'Transfer successful', ...result });
 

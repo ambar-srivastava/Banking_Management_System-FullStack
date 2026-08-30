@@ -1,45 +1,11 @@
-require('dotenv').config();
+const http = require('http')
+const app = require('./app')
+const { initSocket } = require('./socket')
 
-// ---- Core dependencies ----
-// const http = require('http');
-const express = require('express');
-const cors = require('cors');
+const server = http.createServer(app)
+initSocket(server)
 
-// ---- Local modules ----
-const pool = require('./config/db');
-const authRoutes = require('./routes/authRoutes');
-// const authenticateToken = require('./middleware/authMiddleware');
-const accountRoutes = require('./routes/accountRoutes');
-const loanRoutes = require('./routes/loanRoutes');
-const dashboardRoutes = require('./routes/dashboardRoutes');
-
-// ---- App setup ----
-// const app = require('./app');
-const app = express();
-// const { initSocket } = require('./socket');
-app.use(express.json());
-app.use(cors());
-
-// ---- Routes ----
-app.get('/', (req, res) => {
-    res.json({ message: 'Banking Management System API is running' });
-});
-
-app.use('/api/auth', authRoutes);
-
-// app.get('/api/profile', authenticateToken, (req, res) => {
-//     res.json({ message: 'You are authenticated', user: req.user });
-// });
-
-app.use('/api/accounts', accountRoutes);
-
-app.use('/api/loans', loanRoutes);
-
-app.use('/api/dashboard', dashboardRoutes);
-
-// ---- Start server ----
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 5000
+server.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`)
+})
