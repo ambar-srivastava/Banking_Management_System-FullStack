@@ -28,3 +28,8 @@ export function clearSession() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
 };
+
+export async function verifyTwoFactorLogin(preAuthToken, token) {
+    const { data } = await axiosClient.post('/auth/2fa/login-verify', { preAuthToken, token });
+    return data;
+}

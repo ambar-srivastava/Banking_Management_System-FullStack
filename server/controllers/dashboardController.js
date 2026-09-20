@@ -8,9 +8,9 @@ async function getDashboard(req, res) {
         if (role === 'customer') {
             data = await getCustomerDashboard(userId);
         } else if (role === 'employee') {
-            getEmployeeDashboard();
+            data = await getEmployeeDashboard();
         } else if (role === 'admin') {
-            getAdminDashboard();
+            data = await getAdminDashboard();
         } else {
             return res.status(403).json({ error: 'Unknown role' });
         }

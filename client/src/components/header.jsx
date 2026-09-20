@@ -4,10 +4,13 @@ import { LogOut } from "lucide-react";
 import { logout } from "@/features/auth/authSlice";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
+import { useSelector } from "react-redux";
 
 export function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const role = useSelector((state) => state.auth.user?.role);
 
   function handleLogout() {
     dispatch(logout());
@@ -38,6 +41,27 @@ export function Header() {
           >
             Loans
           </Link>
+          <Link
+            to="/security"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Security
+          </Link>
+          <Link
+            to="/analytics"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Analytics
+          </Link>
+
+          {(role === "employee" || role === "admin") && (
+            <Link
+              to="/admin/users"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Manage Users
+            </Link>
+          )}
         </nav>
       </div>
 

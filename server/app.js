@@ -14,6 +14,8 @@ const authRoutes = require('./routes/authRoutes')
 const accountRoutes = require('./routes/accountRoutes')
 const loanRoutes = require('./routes/loanRoutes')
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const analyticsRoutes = require('./routes/analyticsRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
 const app = express();
 
@@ -33,7 +35,8 @@ app.use('/api/auth', authRoutes)
 app.use('/api/accounts', accountRoutes)
 app.use('/api/loans', loanRoutes)
 app.use('/api/dashboard', dashboardRoutes)
-
+app.use('/api/analytics', analyticsRoutes)
+app.use('/api/admin', adminRoutes)
 app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' })
 })

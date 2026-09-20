@@ -92,7 +92,7 @@ export function LoanApplicationForm() {
           <Field invalid={!!errors.accountId}>
             <FieldLabel>Account</FieldLabel>
             <FieldContent>
-              <Controller
+              {/* <Controller
                 control={control}
                 name="accountId"
                 render={({ field }) => (
@@ -109,6 +109,36 @@ export function LoanApplicationForm() {
                     </SelectContent>
                   </Select>
                 )}
+              /> */}
+              <Controller
+                control={control}
+                name="accountId"
+                render={({ field }) => {
+                  // NEW: Find the matching account based on the currently selected ID
+                  const selectedAccount = accounts.find(
+                    (acc) => String(acc.id) === String(field.value),
+                  );
+
+                  return (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        {/* NEW: Explicitly define what text displays inside the trigger */}
+                        <SelectValue placeholder="Select account to receive funds">
+                          {selectedAccount
+                            ? `${selectedAccount.account_number} (${selectedAccount.account_type})`
+                            : "Select account to receive funds"}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {accounts.map((acc) => (
+                          <SelectItem key={acc.id} value={String(acc.id)}>
+                            {acc.account_number} ({acc.account_type})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  );
+                }}
               />
             </FieldContent>
             <FieldError>{errors.accountId?.message}</FieldError>

@@ -17,7 +17,7 @@ async function getCustomerDashboard(userId) {
         accountCount: parseInt(balanceResult.rows[0].account_count),
         totalBalance: balanceResult.rows[0].total_balance,
         recentTransactions: recentTxResult.rows,
-        loanSummery: loanSummaryResult.rows
+        loanSummary: loanSummaryResult.rows // FIXED: Was 'loanSummery'
     };
 }
 
@@ -51,7 +51,8 @@ async function getAdminDashboard() {
      FROM accounts`
     );
 
-    // Flage unusally large transactions for review - a simple starting point
+    // FIXED: Typo in comment (Flag unusually)
+    // Flag unusually large transactions for review - a simple starting point
     const suspiciousResult = await pool.query(
         `SELECT t.id, t.type, t.amount, t.created_at, a.account_number, u.full_name FROM transactions t JOIN accounts a ON t.account_id = a.id JOIN users u ON a.user_id = u.id WHERE t.amount > 100000 ORDER BY t.created_at DESC LIMIT 20`
     )
@@ -65,4 +66,3 @@ async function getAdminDashboard() {
 }
 
 module.exports = { getCustomerDashboard, getEmployeeDashboard, getAdminDashboard };
-

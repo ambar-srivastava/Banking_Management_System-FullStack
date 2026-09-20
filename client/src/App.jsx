@@ -1,14 +1,17 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
-import { ProtectedRoute } from "./components/protected-route";
+import { ProtectedRoute } from "@/components/protected-route";
+import { RoleProtectedRoute } from "@/components/role-protected-route";
 
-import { LoginSkeleton } from "./components/skeletons/LoginSkeleton";
-import { RegisterSkeleton } from "./components/skeletons/RegisterSkeleton";
-import { DashboardSkeleton } from "./components/skeletons/DashboardSkeleton";
-import { AccountsSkeleton } from "./components/skeletons/AccountsSkeleton";
-import { TransactionsSkeleton } from "./components/skeletons/TransactionsSkeleton";
-import { LoansSkeleton } from "./components/skeletons/LoansSkeleton";
+import { LoginSkeleton } from "@/components/skeletons/LoginSkeleton";
+import { RegisterSkeleton } from "@/components/skeletons/RegisterSkeleton";
+import { DashboardSkeleton } from "@/components/skeletons/DashboardSkeleton";
+import { AccountsSkeleton } from "@/components/skeletons/AccountsSkeleton";
+import { TransactionsSkeleton } from "@/components/skeletons/TransactionsSkeleton";
+import { LoansSkeleton } from "@/components/skeletons/LoansSkeleton";
+import { AnalyticsSkeleton } from "@/components/skeletons/AnalyticsSkeleton";
+import { AdminUsersSkeleton } from "@/components/skeletons/AdminUsersSkeleton";
 
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/pages/RegisterPage"));
@@ -16,6 +19,9 @@ const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
 const AccountsPage = lazy(() => import("@/pages/AccountsPage"));
 const TransactionsPage = lazy(() => import("@/pages/TransactionsPage"));
 const LoansPage = lazy(() => import("@/pages/LoansPage"));
+const SecurityPage = lazy(() => import("@/pages/SecurityPage"));
+const AnalyticsPage = lazy(() => import("@/pages/AnalyticsPage"));
+const AdminUsersPage = lazy(() => import("@/pages/AdminUsersPage"));
 
 import { SocketManager } from "@/components/socket-manager";
 
@@ -77,6 +83,39 @@ function App() {
               </Suspense>
             }
           />
+
+          <Route
+            path="/security"
+            element={
+              <Suspense fallback={<DashboardSkeleton />}>
+                <SecurityPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/analytics"
+            element={
+              <Suspense fallback={<AnalyticsSkeleton />}>
+                {<AnalyticsPage />}
+              </Suspense>
+            }
+          />
+
+          <Route
+            element={
+              <RoleProtectedRoute allowedRoles={["employee", "admin"]} />
+            }
+          >
+            <Route
+              path="/admin/users"
+              element={
+                <Suspense fallback={<AdminUsersSkeleton />}>
+                  <AdminUsersPage />
+                </Suspense>
+              }
+            />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />

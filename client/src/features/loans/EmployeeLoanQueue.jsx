@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { fetchPendingLoans, decideLoan } from "./loanSlice";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -76,7 +76,7 @@ export function EmployeeLoanQueue() {
                 </TableCell>
               </TableRow>
             )}
-            {pendingLoans.map((loan) => (
+            {pendingLoans?.map((loan) => (
               <TableRow key={loan.id}>
                 <TableCell>{loan.full_name}</TableCell>
                 <TableCell>{loan.account_number}</TableCell>
