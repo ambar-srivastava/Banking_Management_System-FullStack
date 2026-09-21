@@ -6,7 +6,7 @@ export function connectSoket(token) {
     if (socket?.connected) return socket;
 
     // FIXED: Added the Render backend URL as an explicit fallback
-    const socketUrl = import.meta.env.VITE_SOCKET_URL || "https://banking-management-api-wyh0.onrender.com";
+    const socketUrl = "https://banking-management-api-wyh0.onrender.com";
 
     socket = io(socketUrl, {
         auth: { token },
