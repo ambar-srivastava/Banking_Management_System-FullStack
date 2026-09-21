@@ -1,6 +1,6 @@
 import { getToken } from './authService';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "https://banking-management-api-wyh0.onrender.com/api";
 
 export async function apiRequest(path, options = {}) {
     const token = getToken();
