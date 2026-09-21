@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    // FIXED: Added your Render URL as an explicit fallback
-    baseURL: import.meta.env.VITE_API_URL || "https://banking-management-api-wyh0.onrender.com/api",
+    // Temporarily removed the env variable to force it
+    baseURL: "https://banking-management-api-wyh0.onrender.com/api",
     headers: {
         "Content-Type": "application/json",
     },
