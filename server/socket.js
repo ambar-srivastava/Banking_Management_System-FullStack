@@ -5,7 +5,11 @@ let io = null;
 
 function initSocket(httpServer) {
     io = new Server(httpServer, {
-        cors: { origin: process.env.CLIENT_URL || '*' },
+        cors: {
+            origin: "https://banking-management-system-full-stac.vercel.app",
+            methods: ["GET", "POST", "PUT", "DELETE"],
+            credentials: true
+        }
     })
 
     //Auth handshake: client must send its JWT, same token used for REST calls
