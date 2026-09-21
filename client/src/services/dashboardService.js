@@ -1,4 +1,4 @@
-import { apiRequest } from '@/lib/axiosClient';
+import { apiRequest } from '@/services/apiClient';
 
 export function getDashboard() {
     return apiRequest('/dashboard');
