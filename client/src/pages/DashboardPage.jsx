@@ -19,7 +19,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main className="mx-auto max-w-5xl p-6">
+      <main className="mx-auto max-w-5xl space-y-6 p-4 sm:p-6">
         <h1 className="mb-6 text-2xl font-bold">Welcome, {user?.fullName}</h1>
 
         {status === "loading" && <DashboardSkeleton />}

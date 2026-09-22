@@ -12,7 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TableBody,Table, TableHeader, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import {
+  TableBody,
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 import { TransactionsSkeleton } from "@/components/skeletons/TransactionsSkeleton";
 
 const TYPE_OPTIONS = [
@@ -73,9 +80,12 @@ export default function TransactionsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main className="mx-auto max-w-5xl space-y-6 p-6">
+      <main className="mx-auto max-w-5xl space-y-6 p-4 sm:p-6">
         <div>
-          <Link to="/accounts" className="text-sm text-muted-foreground hover:text-foreground">
+          <Link
+            to="/accounts"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
             U+02190 Back to Accounts
           </Link>
           <h1 className="mt-1 text-2xl font-bold">
@@ -166,7 +176,9 @@ export default function TransactionsPage() {
                   <TableHead>Date</TableHead>
                   <TableHead>Type</TableHead>
                   <TableHead>Amount</TableHead>
-                  <TableHead>Balance After</TableHead>
+                  <TableHead className="hidden sm:table-cell">
+                    Balance After
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -191,7 +203,7 @@ export default function TransactionsPage() {
                     <TableCell>
                       Rs. {parseFloat(tx.amount).toFixed(2)}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">
                       Rs. {parseFloat(tx.balance_after).toFixed(2)}
                     </TableCell>
                   </TableRow>

@@ -24,10 +24,10 @@ export default function AccountsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main className="mx-auto max-w-5xl space-y-6 p-6">
-        <div className="flex items-center justify-between">
+      <main className="mx-auto max-w-5xl space-y-6 p-4 sm:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-bold">Your Accounts</h1>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <OpenAccountDialog />
             {list.length > 0 && <TransferFundsDialog accounts={list} />}
           </div>

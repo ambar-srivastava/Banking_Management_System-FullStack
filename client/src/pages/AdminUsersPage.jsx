@@ -19,8 +19,8 @@ export default function AdminUsersPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main className="mx-auto max-w-4xl space-y-6 p-6">
-        <div className="flex items-center justify-between">
+      <main className="mx-auto max-w-5xl space-y-6 p-4 sm:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-bold">Manage Users</h1>
           {isAdmin && <CreateStaffDialog />}
         </div>

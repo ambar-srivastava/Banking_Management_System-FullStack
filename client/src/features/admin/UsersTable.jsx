@@ -66,7 +66,7 @@ export function UsersTable({ users, isAdmin, currentUserId }) {
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
+              <TableHead className="hidden sm:table-cell">Email</TableHead>
               <TableHead>Role</TableHead>
               {isAdmin && (
                 <TableHead className="text-right">Change Role</TableHead>
@@ -77,7 +77,9 @@ export function UsersTable({ users, isAdmin, currentUserId }) {
             {users.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.full_name}</TableCell>
-                <TableCell>{user.email}</TableCell>
+                <TableCell className="hidden sm:table-cell">
+                  {user.email}
+                </TableCell>
                 <TableCell>
                   <Badge variant={ROLE_VARIANT[user.role]}>{user.role}</Badge>
                 </TableCell>

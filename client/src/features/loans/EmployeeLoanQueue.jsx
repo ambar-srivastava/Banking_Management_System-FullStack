@@ -59,8 +59,8 @@ export function EmployeeLoanQueue() {
               <TableHead>Applicant</TableHead>
               <TableHead>Account</TableHead>
               <TableHead>Principal</TableHead>
-              <TableHead>Rate</TableHead>
-              <TableHead>Term</TableHead>
+              <TableHead className="hidden sm:table-cell">Rate</TableHead>
+              <TableHead className="hidden sm:table-cell">Term</TableHead>
               <TableHead>EMI</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -83,8 +83,12 @@ export function EmployeeLoanQueue() {
                 <TableCell>
                   Rs. {parseFloat(loan.principal).toFixed(2)}
                 </TableCell>
-                <TableCell>{loan.annual_interest_rate}%</TableCell>
-                <TableCell>{loan.term_months} months</TableCell>
+                <TableCell className="hidden sm:table-cell">
+                  {loan.annual_interest_rate}%
+                </TableCell>
+                <TableCell className="hidden sm:table-cell">
+                  {loan.term_months} mo
+                </TableCell>
                 <TableCell>
                   Rs. {parseFloat(loan.emi_amount).toFixed(2)}
                 </TableCell>
